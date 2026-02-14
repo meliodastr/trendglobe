@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrendGlobe | Help Center</title>
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+  <div class="topbar"><div class="container"><div class="inner">
+    <a href="./index.html" class="gradient-text" style="font-weight:900;font-size:18px">TrendGlobe</a>
+    <a href="./legal/disclaimer.html" class="chip" style="border-radius:12px;padding:8px 10px">Legal</a>
+  </div></div></div>
+
+  <main class="container">
+    <h1 style="font-size:32px;font-weight:900">Help Center</h1>
+    <p style="color:#cbd5e1">Search FAQs or ask the AI assistant (answers cite sources from the Help docs).</p>
+
+    <div class="glass card">
+      <div class="row">
+        <input id="q" class="input" placeholder="Ask: How do alerts work?" />
+        <button id="ask" class="btn btnPrimary">Ask</button>
+      </div>
+      <div id="a" style="margin-top:12px;color:#e2e8f0;line-height:1.55"></div>
+      <div id="c" style="margin-top:10px;color:#94a3b8;font-size:12px"></div>
+    </div>
+
+    <div style="height:14px"></div>
+
+    <div class="glass card">
+      <h2 style="margin:0 0 10px">Quick FAQs</h2>
+      <ul style="color:#cbd5e1;line-height:1.8">
+        <li><b>Free limits:</b> 1 trend detail/day, 1 alert rule, daily digest.</li>
+        <li><b>Pro:</b> instant alerts + unlimited details + AI ideas + exports.</li>
+        <li><b>Accuracy:</b> we show timestamps, sources and history; no guaranteed outcomes.</li>
+      </ul>
+    </div>
+
+    <footer style="padding:30px 0"><small>Back to <a href="./index.html">Home</a></small></footer>
+  </main>
+
+  <script type="module">
+    const api = localStorage.getItem('tg_api') || 'http://localhost:8787';
+    const out = (id, txt)=> document.getElementById(id).innerHTML = txt;
+
+    async function ask(){
+      const q = document.getElementById('q').value.trim();
+      if(!q) return;
+      out('a','Thinking…'); out('c','');
+      const res = await fetch(`${api}/api/help/ask`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({q})});
+      const data = await res.json();
+      out('a', data.answer || 'No answer');
+      out('c', data.citations?.length ? ('Sources: ' + data.citations.join(' • ')) : '');
+    }
+    document.getElementById('ask').addEventListener('click', ask);
+    document.getElementById('q').addEventListener('keydown', (e)=>{ if(e.key==='Enter') ask(); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrendGlobe | Reports</title>
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+  <div class="topbar"><div class="container"><div class="inner">
+    <a href="./index.html" class="gradient-text" style="font-weight:900;font-size:18px">TrendGlobe</a>
+    <a href="./help.html" class="chip" style="border-radius:12px;padding:8px 10px">Help</a>
+  </div></div></div>
+
+  <main class="container">
+    <h1 style="font-size:32px;font-weight:900">Reports</h1>
+    <p style="color:#cbd5e1">SEO reports are generated automatically by the worker. New posts appear here.</p>
+
+    <div id="list" class="glass card"></div>
+
+    <footer style="padding:30px 0"><small>Back to <a href="./index.html">Home</a></small></footer>
+  </main>
+
+  <script>
+    const api = localStorage.getItem('tg_api') || 'http://localhost:8787';
+    async function load(){
+      const res = await fetch(`${api}/api/reports?limit=50`);
+      const data = await res.json();
+      const items = data.reports || [];
+      document.getElementById('list').innerHTML = items.length ? (
+        '<ul style="color:#cbd5e1;line-height:1.9">' + items.map(r=>`<li><a href="${api}${r.url}" target="_blank">${r.title}</a> <small>(${new Date(r.publishedAt).toLocaleDateString()})</small></li>`).join('') + '</ul>'
+      ) : '<small>No reports yet. Run the worker.</small>';
+    }
+    load();
+  </script>
+</body>
+</html>
