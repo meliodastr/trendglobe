@@ -1,313 +1,269 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrendGlobe - Launch Checklist</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrendGlobe | Predict Trends Early</title>
+  <meta name="description" content="Trend intelligence platform. Discover emerging topics early and set alerts." />
+
+  <!-- Tailwind (MVP). For production, self-host CSS. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    .glass{background:rgba(255,255,255,.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.10)}
+    .gradient-text{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .chip{border:1px solid rgba(148,163,184,.35);background:rgba(15,23,42,.35)}
+    .lock{filter:grayscale(100%);opacity:.9}
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',
+            secondary: '#8b5cf6',
+            accent: '#ec4899',
+            success: '#10b981',
+            warning: '#f59e0b',
+            danger: '#ef4444'
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="bg-slate-900 text-white font-['Inter'] min-h-screen">
-    
-    <!-- PROGRESS HEADER -->
-    <div class="fixed top-0 w-full bg-slate-900/95 backdrop-blur border-b border-slate-800 z-50">
-        <div class="max-w-3xl mx-auto px-4 py-4">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-semibold text-emerald-400">Launch Progress</span>
-                <span class="text-sm font-bold" id="progress-text">0%</span>
-            </div>
-            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
-                <div id="progress-bar" class="h-full bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full transition-all duration-500" style="width: 0%"></div>
-            </div>
+
+<body class="bg-slate-950 text-white overflow-x-hidden selection:bg-primary selection:text-white">
+
+  <!-- Top bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/85 backdrop-blur border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="h-14 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+            <span class="font-black">TG</span>
+          </div>
+          <div>
+            <div class="text-lg font-extrabold gradient-text">TrendGlobe</div>
+            <div class="text-[10px] text-slate-400 tracking-wider" data-i18n="tagline">GLOBAL TREND INTELLIGENCE</div>
+          </div>
         </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Language -->
+          <label class="sr-only" for="lang">Language</label>
+          <select id="lang" class="chip text-xs px-2 py-1.5 rounded-lg outline-none">
+            <option value="en">English</option>
+            <option value="tr">Türkçe</option>
+            <option value="es">Español</option>
+          </select>
+
+          <!-- Theme -->
+          <button id="themeBtn" class="chip px-3 py-1.5 rounded-lg text-xs" type="button" data-i18n="darkMode">Dark</button>
+
+          <!-- Auth placeholder -->
+          <button id="loginBtn" class="px-3 py-1.5 rounded-lg bg-white text-slate-950 text-xs font-bold" type="button" data-i18n="login">Login</button>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <div class="max-w-3xl mx-auto px-4 pt-24 pb-12">
-        
-        <!-- EMERGENCY MODE BANNER -->
-        <div class="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-6 mb-8 text-center">
-            <div class="text-3xl mb-2">🚀</div>
-            <h1 class="text-2xl font-bold mb-2">ZERO BUDGET LAUNCH MODE</h1>
-            <p class="text-sm opacity-90">Para kazanana kadar SADECE ücretsiz araçlar kullanacağız!</p>
+  <!-- Hero -->
+  <main class="pt-20">
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-slate-950 to-slate-950"></div>
+      <div class="max-w-7xl mx-auto px-4 py-14 relative">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs">
+              <span class="w-2 h-2 bg-success rounded-full animate-pulse"></span>
+              <span data-i18n="betaNote">Live beta • Real data coming from your sources</span>
+            </div>
+
+            <h1 class="mt-6 text-4xl md:text-6xl font-extrabold leading-tight">
+              <span data-i18n="heroTitle1">Know what's next</span><br>
+              <span class="gradient-text" data-i18n="heroTitle2">before it happens</span>
+            </h1>
+
+            <p class="mt-5 text-slate-300 max-w-xl" data-i18n="heroDesc">
+              Discover emerging topics early, set alerts, and share trend cards. Free plan included.
+            </p>
+
+            <div class="mt-7 flex flex-col sm:flex-row gap-3">
+              <button id="ctaStart" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary to-secondary font-bold" type="button" data-i18n="ctaStart">Start free</button>
+              <a href="#pricing" class="px-6 py-3 rounded-2xl glass font-semibold text-center" data-i18n="ctaPricing">See pricing</a>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-3 text-xs text-slate-400">
+              <span class="flex items-center gap-2"><span class="text-success">●</span><span data-i18n="trust1">No credit card for Free</span></span>
+              <span class="flex items-center gap-2"><span class="text-success">●</span><span data-i18n="trust2">Cancel anytime</span></span>
+              <span class="flex items-center gap-2"><span class="text-success">●</span><span data-i18n="trust3">Privacy-first</span></span>
+            </div>
+
+            <p class="mt-6 text-[11px] text-slate-500" data-i18n="disclaimer">
+              Predictions are informational and not financial advice.
+            </p>
+          </div>
+
+          <!-- Live panel -->
+          <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-2xl"></div>
+            <div class="relative glass rounded-3xl p-6">
+              <div class="flex items-center justify-between">
+                <div class="font-bold" data-i18n="livePredictions">Live trends</div>
+                <div class="text-[11px] text-slate-400">
+                  <span data-i18n="refreshIn">Refresh in</span>
+                  <span class="font-mono text-warning" id="countdown">00:15:00</span>
+                </div>
+              </div>
+
+              <div class="mt-4 space-y-3" id="trendList" aria-live="polite"></div>
+
+              <div class="mt-5 p-4 rounded-2xl bg-success/10 border border-success/20">
+                <div class="text-xs uppercase tracking-wider text-success font-semibold" data-i18n="freeLimitTitle">Free plan limits</div>
+                <div class="mt-1 text-sm text-slate-200" data-i18n="freeLimitDesc">You can open 1 trend detail per day. Upgrade for full access and alerts.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters + Arena -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-extrabold" data-i18n="arenaTitle">Prediction Arena</h2>
+          <p class="text-slate-400" data-i18n="arenaDesc">Vote on trends and earn points. Community signals improve ranking.</p>
+        </div>
+        <div class="glass rounded-2xl p-3 flex items-center gap-4">
+          <div class="text-right">
+            <div class="text-[11px] text-slate-400" data-i18n="yourPlan">Your plan</div>
+            <div class="font-bold text-primary" id="planLabel">Free</div>
+          </div>
+          <div class="w-px h-10 bg-slate-800"></div>
+          <div class="text-right">
+            <div class="text-[11px] text-slate-400" data-i18n="todayVotes">Votes today</div>
+            <div class="font-mono font-bold" id="votesToday">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-2" role="tablist" aria-label="Trend categories">
+        <button class="chip px-4 py-2 rounded-full text-sm" data-filter="all" type="button" data-i18n="filterAll">All</button>
+        <button class="chip px-4 py-2 rounded-full text-sm" data-filter="tech" type="button" data-i18n="filterTech">🤖 Tech</button>
+        <button class="chip px-4 py-2 rounded-full text-sm" data-filter="culture" type="button" data-i18n="filterCulture">🎭 Culture</button>
+        <button class="chip px-4 py-2 rounded-full text-sm" data-filter="sports" type="button" data-i18n="filterSports">⚽ Sports</button>
+        <button class="chip px-4 py-2 rounded-full text-sm" data-filter="finance" type="button" data-i18n="filterFinance">📈 Finance</button>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="arenaGrid"></div>
+
+      <div class="mt-10 glass rounded-2xl p-6">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold" data-i18n="shareTitle">Shareable Trend Cards</h3>
+          <button id="generateCard" type="button" class="text-sm text-primary font-semibold" data-i18n="shareBtn">Generate</button>
+        </div>
+        <p class="mt-2 text-sm text-slate-400" data-i18n="shareDesc">Create a card image link for social media. Free users get 1/day.</p>
+        <div class="mt-4 flex flex-col sm:flex-row gap-2">
+          <input id="cardLink" class="flex-1 px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-sm" readonly value="" placeholder="https://..." />
+          <button id="copyCard" class="px-4 py-2 rounded-xl bg-primary/20 border border-primary/30 text-primary font-semibold" type="button" data-i18n="copy">Copy</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="border-t border-slate-800 bg-slate-950/30">
+      <div class="max-w-7xl mx-auto px-4 py-14">
+        <div class="text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold" data-i18n="pricingTitle">Simple pricing</h2>
+          <p class="mt-3 text-slate-400" data-i18n="pricingDesc">Start free. Upgrade for unlimited trend details, alerts, and exports.</p>
+
+          <div class="mt-5 inline-flex items-center gap-2 text-xs text-slate-400">
+            <span data-i18n="currencyLabel">Currency</span>
+            <select id="currency" class="chip px-2 py-1.5 rounded-lg">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+            </select>
+          </div>
         </div>
 
-        <!-- PHASE 1: BUGÜN (0$) -->
-        <div class="space-y-4 mb-12">
-            <div class="flex items-center space-x-3 mb-4">
-                <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-sm">1</div>
-                <h2 class="text-xl font-bold">BUGÜN Yapılacaklar (0$)</h2>
-            </div>
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="glass rounded-3xl p-6">
+            <div class="font-bold text-lg" data-i18n="planFree">Free</div>
+            <div class="mt-2 text-3xl font-extrabold">$0</div>
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              <li data-i18n="free1">Top 5 trends daily</li>
+              <li data-i18n="free2">1 trend detail/day</li>
+              <li data-i18n="free3">1 share card/day</li>
+            </ul>
+            <button class="mt-6 w-full py-3 rounded-2xl bg-white text-slate-950 font-bold" type="button" id="chooseFree" data-i18n="chooseFree">Continue free</button>
+          </div>
 
-            <!-- Task 1 -->
-            <div class="task-card glass rounded-xl p-4 border border-slate-700 hover:border-emerald-500/50 transition cursor-pointer" onclick="toggleTask(this)">
-                <div class="flex items-start space-x-3">
-                    <div class="task-checkbox w-6 h-6 rounded border-2 border-slate-600 flex items-center justify-center mt-0.5 transition">
-                        <i class="fas fa-check text-emerald-400 opacity-0 transition"></i>
-                    </div>
-                    <div class="flex-1">
-                        <div class="font-semibold mb-1">Domain Al (ÜCRETSİZ)</div>
-                        <div class="text-sm text-slate-400 mb-2">trendglobe-ai.vercel.app (ücretsiz subdomain)</div>
-                        <div class="flex space-x-2">
-                            <span class="text-xs px-2 py-1 rounded bg-emerald-500/20 text-emerald-400">ÜCRETSİZ</span>
-                            <span class="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-400">5 dk</span>
-                        </div>
-                    </div>
-                </div>
+          <div class="glass rounded-3xl p-6 border border-primary/40">
+            <div class="flex items-center justify-between">
+              <div class="font-bold text-lg" data-i18n="planPro">Pro</div>
+              <span class="text-xs px-2 py-1 rounded-full bg-primary/20 text-primary" data-i18n="recommended">Recommended</span>
             </div>
+            <div class="mt-2 text-3xl font-extrabold" id="proPrice">$29</div>
+            <div class="text-xs text-slate-400" data-i18n="perMonth">per month</div>
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              <li data-i18n="pro1">Unlimited trend details</li>
+              <li data-i18n="pro2">Real-time alerts (email/telegram)</li>
+              <li data-i18n="pro3">CSV export</li>
+            </ul>
+            <button class="mt-6 w-full py-3 rounded-2xl bg-gradient-to-r from-primary to-secondary font-bold" type="button" id="buyPro" data-i18n="buyPro">Upgrade to Pro</button>
+            <p class="mt-3 text-[11px] text-slate-500" data-i18n="stripeNote">Checkout opens via Stripe (placeholder).</p>
+          </div>
 
-            <!-- Task 2 -->
-            <div class="task-card glass rounded-xl p-4 border border-slate-700 hover:border-emerald-500/50 transition cursor-pointer" onclick="toggleTask(this)">
-                <div class="flex items-start space-x-3">
-                    <div class="task-checkbox w-6 h-6 rounded border-2 border-slate-600 flex items-center justify-center mt-0.5 transition">
-                        <i class="fas fa-check text-emerald-400 opacity-0 transition"></i>
-                    </div>
-                    <div class="flex-1">
-                        <div class="font-semibold mb-1">Vercel'e Deploy Et</div>
-                        <div class="text-sm text-slate-400 mb-2">GitHub repo → Vercel (otomatik deploy)</div>
-                        <div class="flex space-x-2">
-                            <span class="text-xs px-2 py-1 rounded bg-emerald-500/20 text-emerald-400">ÜCRETSİZ</span>
-                            <span class="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-400">10 dk</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Task 3 -->
-            <div class="task-card glass rounded-xl p-4 border border-slate-700 hover:border-emerald-500/50 transition cursor-pointer" onclick="toggleTask(this)">
-                <div class="flex items-start space-x-3">
-                    <div class="task-checkbox w-6 h-6 rounded border-2 border-slate-600 flex items-center justify-center mt-0.5 transition">
-                        <i class="fas fa-check text-emerald-400 opacity-0 transition"></i>
-                    </div>
-                    <div class="flex-1">
-                        <div class="font-semibold mb-1">Google AdSense Başvurusu</div>
-                        <div class="text-sm text-slate-400 mb-2">Onay için minimum içerik oluştur</div>
-                        <div class="flex space-x-2">
-                            <span class="text-xs px-2 py-1 rounded bg-emerald-500/20 text-emerald-400">ÜCRETSİZ</span>
-                            <span class="text-xs px-2 py-1 rounded bg-yellow-500/20 text-yellow-400">24-48 saat onay</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Task 4 -->
-            <div class="task-card glass rounded-xl p-4 border border-slate-700 hover:border-emerald-500/50 transition cursor-pointer" onclick="toggleTask(this)">
-                <div class="flex items-start space-x-3">
-                    <div class="task-checkbox w-6 h-6 rounded border-2 border-slate-600 flex items-center justify-center mt-0.5 transition">
-                        <i class="fas fa-check text-emerald-400 opacity-0 transition"></i>
-                    </div>
-                    <div class="flex-1">
-                        <div class="font-semibold mb-1">Sosyal Medya Hesapları</div>
-                        <div class="text-sm text-slate-400 mb-2">Twitter, LinkedIn, TikTok (ücretsiz)</div>
-                        <div class="flex space-x-2">
-                            <span class="text-xs px-2 py-1 rounded bg-emerald-500/20 text-emerald-400">ÜCRETSİZ</span>
-                            <span class="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-400">30 dk</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div class="glass rounded-3xl p-6">
+            <div class="font-bold text-lg" data-i18n="planElite">Elite</div>
+            <div class="mt-2 text-3xl font-extrabold" id="elitePrice">$99</div>
+            <div class="text-xs text-slate-400" data-i18n="perMonth">per month</div>
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              <li data-i18n="elite1">API + Webhooks</li>
+              <li data-i18n="elite2">Team seats</li>
+              <li data-i18n="elite3">Priority support</li>
+            </ul>
+            <button class="mt-6 w-full py-3 rounded-2xl bg-primary/20 border border-primary/30 text-primary font-bold" type="button" id="contactSales" data-i18n="contactSales">Contact sales</button>
+          </div>
         </div>
 
-        <!-- PARA KAZANMA AŞAMALARI -->
-        <div class="space-y-4 mb-12">
-            <div class="flex items-center space-x-3 mb-4">
-                <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center font-bold text-sm">2</div>
-                <h2 class="text-xl font-bold">Para Kazanma Planı</h2>
-            </div>
-
-            <!-- Revenue Milestone 1 -->
-            <div class="glass rounded-xl p-6 border border-slate-700">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <div class="text-sm text-slate-400">Aşama 1</div>
-                        <div class="font-bold text-lg">İlk 100$</div>
-                    </div>
-                    <div class="text-emerald-400 font-bold">~Gün 7-14</div>
-                </div>
-                <div class="space-y-2 text-sm">
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-emerald-400"></i>
-                        <span>Google AdSense aktif</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-emerald-400"></i>
-                        <span>Affiliate linkler (Amazon)</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-emerald-400"></i>
-                        <span>İlk 1000 ziyaretçi (organik)</span>
-                    </div>
-                </div>
-                <div class="mt-4 p-3 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
-                    <div class="text-xs text-emerald-400">Bu para ile: Domain al (trendglobe.ai)</div>
-                </div>
-            </div>
-
-            <!-- Revenue Milestone 2 -->
-            <div class="glass rounded-xl p-6 border border-slate-700">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <div class="text-sm text-slate-400">Aşama 2</div>
-                        <div class="font-bold text-lg">İlk 500$</div>
-                    </div>
-                    <div class="text-emerald-400 font-bold">~Ay 1</div>
-                </div>
-                <div class="space-y-2 text-sm">
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-blue-400"></i>
-                        <span>Premium üyelik (5$)</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-blue-400"></i>
-                        <span>Direct ad deals ( küçük markalar)</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-blue-400"></i>
-                        <span>Data API erişimi satışı</span>
-                    </div>
-                </div>
-                <div class="mt-4 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                    <div class="text-xs text-blue-400">Bu para ile: Mobil app geliştirme</div>
-                </div>
-            </div>
-
-            <!-- Revenue Milestone 3 -->
-            <div class="glass rounded-xl p-6 border border-slate-700">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <div class="text-sm text-slate-400">Aşama 3</div>
-                        <div class="font-bold text-lg">İlk 2000$</div>
-                    </div>
-                    <div class="text-emerald-400 font-bold">~Ay 2-3</div>
-                </div>
-                <div class="space-y-2 text-sm">
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-purple-400"></i>
-                        <span>Enterprise müşteriler</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-purple-400"></i>
-                        <span>White-label lisansları</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-purple-400"></i>
-                        <span>Consulting gelirleri</span>
-                    </div>
-                </div>
-                <div class="mt-4 p-3 bg-purple-500/10 rounded-lg border border-purple-500/20">
-                    <div class="text-xs text-purple-400">Bu para ile: Tam zamanlı çalışma + yatırım</div>
-                </div>
-            </div>
+        <div class="mt-10 text-center text-xs text-slate-500" data-i18n="legalFooter">
+          By upgrading you agree to Terms and Privacy. VAT may apply.
         </div>
+      </div>
+    </section>
 
-        <!-- ACİL PARA GEREKİRSE -->
-        <div class="glass rounded-xl p-6 border border-red-500/30 bg-red-500/5">
-            <div class="flex items-center space-x-3 mb-4">
-                <i class="fas fa-exclamation-triangle text-red-400 text-xl"></i>
-                <h3 class="font-bold text-lg">Acil Para Gerekirse?</h3>
-            </div>
-            <div class="space-y-3 text-sm">
-                <div class="flex items-center space-x-3 p-3 rounded-lg bg-slate-800">
-                    <span class="text-2xl">🏆</span>
-                    <div>
-                        <div class="font-semibold">Hackathon'lar</div>
-                        <div class="text-slate-400">24 saatte demo yap, 10K$ kazan</div>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-3 p-3 rounded-lg bg-slate-800">
-                    <span class="text-2xl">💰</span>
-                    <div>
-                        <div class="font-semibold">Pre-satış</div>
-                        <div class="text-slate-400">Yıllık üyelikleri indirimli sat (önceden para)</div>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-3 p-3 rounded-lg bg-slate-800">
-                    <span class="text-2xl">🤝</span>
-                    <div>
-                        <div class="font-semibold">Freelance + Proje</div>
-                        <div class="text-slate-400">Trend analizi hizmeti sat (gecelik)</div>
-                    </div>
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <div class="font-extrabold gradient-text">TrendGlobe</div>
+          <p class="text-xs text-slate-500 mt-2" data-i18n="footerNote">Build trust: show real metrics, clear sources, and transparent history.</p>
         </div>
-
-        <!-- HEMEN BAŞLA BUTONU -->
-        <div class="fixed bottom-6 left-4 right-4 max-w-3xl mx-auto">
-            <button onclick="startNow()" class="w-full py-4 bg-gradient-to-r from-emerald-600 to-blue-600 rounded-2xl font-bold text-lg shadow-2xl shadow-emerald-500/20 hover:shadow-emerald-500/40 transition transform hover:-translate-y-1">
-                <i class="fas fa-rocket mr-2"></i>
-                HEMEN BAŞLA (0$)
-            </button>
-            <div class="text-center mt-2 text-xs text-slate-500">
-                Tüm adımlar ücretsiz • Kredi kartı gerekmez
-            </div>
+        <div class="text-xs text-slate-500 flex gap-4">
+          <a href="#" class="hover:text-white" data-i18n="privacy">Privacy</a>
+          <a href="#" class="hover:text-white" data-i18n="terms">Terms</a>
+          <a href="#" class="hover:text-white" data-i18n="contact">Contact</a>
         </div>
+      </div>
+    </footer>
+  </main>
 
-    </div>
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
 
-    <script>
-        let completedTasks = 0;
-        const totalTasks = 4;
-
-        function toggleTask(element) {
-            const checkbox = element.querySelector('.task-checkbox');
-            const checkIcon = element.querySelector('.fa-check');
-            const isCompleted = checkbox.classList.contains('bg-emerald-500');
-            
-            if (!isCompleted) {
-                checkbox.classList.add('bg-emerald-500', 'border-emerald-500');
-                checkIcon.classList.remove('opacity-0');
-                element.classList.add('border-emerald-500/50');
-                completedTasks++;
-            } else {
-                checkbox.classList.remove('bg-emerald-500', 'border-emerald-500');
-                checkIcon.classList.add('opacity-0');
-                element.classList.remove('border-emerald-500/50');
-                completedTasks--;
-            }
-            
-            updateProgress();
-        }
-
-        function updateProgress() {
-            const percentage = (completedTasks / totalTasks) * 100;
-            document.getElementById('progress-bar').style.width = percentage + '%';
-            document.getElementById('progress-text').textContent = Math.round(percentage) + '%';
-        }
-
-        function startNow() {
-            const steps = [
-                "1. GitHub hesabı aç (ücretsiz)",
-                "2. Yeni repo oluştur: trendglobe",
-                "3. HTML dosyalarını yükle",
-                "4. Vercel'e bağla (vercel.com)",
-                "5. Site yayında! 🎉"
-            ];
-            
-            alert("ADIM ADIM BAŞLANGIÇ:\n\n" + steps.join("\n") + "\n\nBen (AI) her adımda seninleyim!");
-            
-            // Open Vercel
-            window.open('https://vercel.com/signup', '_blank');
-        }
-
-        // Auto-save progress
-        setInterval(() => {
-            localStorage.setItem('launch_progress', completedTasks);
-        }, 1000);
-
-        // Load progress
-        window.onload = () => {
-            const saved = localStorage.getItem('launch_progress');
-            if (saved) {
-                completedTasks = parseInt(saved);
-                updateProgress();
-            }
-        };
-    </script>
-
-    <style>
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
-        .task-card { transition: all 0.2s ease; }
-        .task-card:active { transform: scale(0.98); }
-    </style>
+  <script src="./i18n.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
